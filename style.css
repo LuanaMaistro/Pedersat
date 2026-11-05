@@ -413,14 +413,14 @@ dialog .btn{margin-top:8px}
 .video-thumb .play svg{width:30px;height:30px;fill:currentColor;margin-left:3px}
 .video-thumb:hover .play{transform:scale(1.08);background:var(--orange-dark)}
 .video-card figcaption{margin-top:10px;font-size:15px;font-weight:600;color:var(--black)}
+.videos.shorts{grid-template-columns:repeat(2,1fr);gap:14px;margin-top:-16px}
+.videos.shorts .video-card.vertical{max-width:none}
 @media (min-width:640px){
-  .videos{grid-template-columns:repeat(3,1fr);align-items:start;justify-items:stretch}
-  .videos .video-card:first-child{grid-column:1/-1}
-  .video-card.vertical{max-width:none}
+  .videos{grid-template-columns:repeat(2,1fr);align-items:start}
+  .videos.shorts{grid-template-columns:repeat(4,1fr);gap:20px}
 }
 @media (min-width:1024px){
-  .videos{grid-template-columns:3.16fr 1fr 1fr 1fr}
-  .videos .video-card:first-child{grid-column:auto}
+  .videos{grid-template-columns:repeat(3,1fr)}
 }
 
 
