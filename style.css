@@ -131,6 +131,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(13,13,15,.9);b
 .ico{width:52px;height:52px;border-radius:14px;background:rgba(255,106,0,.12);color:var(--orange-text);display:grid;place-items:center}
 .card p{color:var(--gray);font-size:15.5px;flex:1}
 .card .btn{min-height:48px;font-size:15px;margin-top:6px;padding:0 20px}
+.card .check-list{margin:0;gap:8px;font-size:15.5px}
 
 
 /* ==========================================================
@@ -252,6 +253,17 @@ footer{background:#08080A;color:#9CA0A8;padding:44px 0 28px;font-size:14px}
 footer h4{font-family:var(--font-head);color:var(--white);font-size:15px;margin-bottom:10px}
 footer li{margin-bottom:6px}
 footer a:hover,.link-btn:hover{color:var(--orange)}
+.social{display:flex;gap:10px;margin-top:16px}
+.social a{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(255,255,255,.18);color:var(--white);transition:background .2s ease,color .2s ease,border-color .2s ease}
+.social a:hover{background:var(--orange);border-color:var(--orange);color:var(--black)}
+.social-center{justify-content:center}
+.nav-social{display:none;margin:0;gap:6px}
+.nav-social a{width:36px;height:36px;border-color:rgba(255,255,255,.14)}
+.nav-social .icon{width:18px;height:18px}
+.menu-social{margin-top:24px}
+@media (min-width:768px){.nav-social{display:flex}}
+.follow{margin-top:28px;font-size:14px;color:#B9BCC2}
+.follow+.social{margin-top:10px}
 .nw{white-space:nowrap}
 .link-btn{padding:0;text-decoration:underline;text-underline-offset:3px;color:inherit;font-size:inherit}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:grid;gap:6px;font-size:13px}
