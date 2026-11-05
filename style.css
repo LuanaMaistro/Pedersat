@@ -385,3 +385,23 @@ dialog .btn{margin-top:8px}
   .final h2{font-size:44px}
   .phone{width:270px}
 }
+
+
+/* ==========================================================
+   VÍDEOS DE INSTALAÇÕES (miniatura que vira player ao clicar)
+   ========================================================== */
+.videos{display:grid;gap:20px;justify-items:center;margin-bottom:36px}
+.video-card{width:100%}
+.video-card.vertical{max-width:260px}
+.video-thumb{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--black);box-shadow:0 8px 24px rgba(13,13,15,.15)}
+.vertical .video-thumb{aspect-ratio:9/16}
+.video-thumb img{width:100%;height:100%;object-fit:cover}
+.video-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-thumb .play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;display:grid;place-items:center;border-radius:50%;background:var(--orange);color:var(--black);box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .2s ease,background .2s ease}
+.video-thumb .play svg{width:30px;height:30px;fill:currentColor;margin-left:3px}
+.video-thumb:hover .play{transform:scale(1.08);background:var(--orange-dark)}
+.video-card figcaption{margin-top:10px;font-size:15px;font-weight:600;color:var(--black)}
+@media (min-width:640px){
+  .videos{grid-template-columns:3.16fr 1fr;align-items:start;justify-items:stretch}
+  .video-card.vertical{max-width:none}
+}

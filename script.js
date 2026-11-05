@@ -52,6 +52,23 @@
     items.forEach(function(el){ el.classList.add('in'); });
   }
 
+  /* Vídeos do YouTube: o player só carrega quando a pessoa clica na capa */
+  document.querySelectorAll('a.video-thumb[data-yt]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + a.getAttribute('data-yt') + '?autoplay=1&rel=0&playsinline=1';
+      f.title = a.getAttribute('aria-label').replace('Assistir ao vídeo: ', '');
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      var box = document.createElement('div');
+      box.className = 'video-thumb';
+      box.appendChild(f);
+      a.replaceWith(box);
+    });
+  });
+
   /* Balão do botão flutuante */
   var bubble = document.getElementById('bubble');
   setTimeout(function(){ bubble.classList.add('show'); }, 4000);
