@@ -1,4 +1,17 @@
 (function(){
+  /* ============================================================
+     WHATSAPP
+     Formato: 55 + DDD + número, sem espaços nem traços.
+     A mensagem de cada botão fica no atributo data-wa-msg do HTML.
+     ============================================================ */
+  var WA_NUMERO = '551432832486';
+
+  document.querySelectorAll('a[data-wa-msg]').forEach(function(a){
+    a.href = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(a.getAttribute('data-wa-msg'));
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
   /* Rastreamento de cliques no WhatsApp (GA4, GTM e Meta Pixel, se instalados) */
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[data-wa]');
