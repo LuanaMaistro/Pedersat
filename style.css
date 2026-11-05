@@ -414,8 +414,13 @@ dialog .btn{margin-top:8px}
 .video-thumb:hover .play{transform:scale(1.08);background:var(--orange-dark)}
 .video-card figcaption{margin-top:10px;font-size:15px;font-weight:600;color:var(--black)}
 @media (min-width:640px){
-  .videos{grid-template-columns:3.16fr 1fr;align-items:start;justify-items:stretch}
+  .videos{grid-template-columns:repeat(3,1fr);align-items:start;justify-items:stretch}
+  .videos .video-card:first-child{grid-column:1/-1}
   .video-card.vertical{max-width:none}
+}
+@media (min-width:1024px){
+  .videos{grid-template-columns:3.16fr 1fr 1fr 1fr}
+  .videos .video-card:first-child{grid-column:auto}
 }
 
 
