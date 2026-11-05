@@ -69,6 +69,68 @@
     });
   });
 
+  /* Galeria de fotos: filtro por tipo e foto ampliada */
+  var galItems = Array.prototype.slice.call(document.querySelectorAll('.gal-item'));
+  var chips = document.querySelectorAll('.chip[data-filter]');
+  var galMore = document.getElementById('galMore');
+  var galFilter = 'all', galExpanded = false;
+  /* Fotos mostradas antes do "Ver mais": celular 4, tablet 6, computador 8 (sempre linhas completas) */
+  function galLimit(){
+    return window.matchMedia('(min-width:1024px)').matches ? 8 : window.matchMedia('(min-width:640px)').matches ? 6 : 4;
+  }
+  function galApply(){
+    var n = 0, GAL_LIMIT = galLimit();
+    galItems.forEach(function(it){
+      var show = galFilter === 'all' || it.getAttribute('data-cat') === galFilter;
+      it.hidden = !show;
+      if (show) { n++; it.classList.toggle('over', !galExpanded && n > GAL_LIMIT); }
+    });
+    galMore.hidden = n <= GAL_LIMIT;
+    galMore.textContent = galExpanded ? 'Ver menos fotos' : 'Ver mais fotos (' + (n - GAL_LIMIT) + ')';
+    galMore.setAttribute('aria-expanded', galExpanded);
+  }
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      galFilter = chip.getAttribute('data-filter');
+      galExpanded = false;
+      chips.forEach(function(c){ c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+      galApply();
+    });
+  });
+  galMore.addEventListener('click', function(){ galExpanded = !galExpanded; galApply(); });
+  galApply();
+  window.addEventListener('resize', galApply);
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCap = document.getElementById('lbCap');
+  var lbList = [], lbPos = 0;
+  function lbShow(){
+    var b = lbList[lbPos];
+    lbImg.src = b.getAttribute('data-full');
+    lbImg.alt = b.getAttribute('data-cap');
+    lbCap.textContent = b.getAttribute('data-cap');
+    var multi = lbList.length > 1;
+    document.getElementById('lbPrev').style.visibility = multi ? '' : 'hidden';
+    document.getElementById('lbNext').style.visibility = multi ? '' : 'hidden';
+  }
+  function lbMove(d){ lbPos = (lbPos + d + lbList.length) % lbList.length; lbShow(); }
+  document.querySelectorAll('.gal-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      lbList = galItems.filter(function(it){ return it.offsetParent !== null; }).map(function(it){ return it.querySelector('.gal-btn'); });
+      lbPos = lbList.indexOf(btn);
+      lbShow();
+      if (lb.showModal) lb.showModal();
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', function(){ lb.close(); });
+  document.getElementById('lbPrev').addEventListener('click', function(){ lbMove(-1); });
+  document.getElementById('lbNext').addEventListener('click', function(){ lbMove(1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') lbMove(-1);
+    if (e.key === 'ArrowRight') lbMove(1);
+  });
+
   /* Balão do botão flutuante */
   var bubble = document.getElementById('bubble');
   setTimeout(function(){ bubble.classList.add('show'); }, 4000);
